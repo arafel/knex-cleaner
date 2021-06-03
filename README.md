@@ -1,5 +1,5 @@
 # knex-cleaner
-[![CircleCI](https://circleci.com/gh/steven-ferguson/knex-cleaner.svg?style=svg)](https://circleci.com/gh/steven-ferguson/knex-cleaner)
+[![CircleCI](https://circleci.com/gh/arafel/knex-cleaner.svg?style=svg)](https://circleci.com/gh/arafel/knex-cleaner)
 
 Helper library to clean a PostgreSQL, MySQL or SQLite3 database tables using Knex. Great for integration tests.
 
