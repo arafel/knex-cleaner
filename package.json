@@ -7,6 +7,9 @@
     "test": "./node_modules/mocha/bin/mocha --timeout 60000",
     "release": "release-it"
   },
+  "engines": {
+    "node": ">= 14.0"
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/arafel/knex-cleaner.git"
@@ -40,6 +43,6 @@
     "mysql": "^2.16.0",
     "pg": "^4.3.0",
     "release-it": "^12.3.5",
-    "sqlite3": "^4.0.8"
+    "sqlite3": "^5.1.0"
   }
 }
