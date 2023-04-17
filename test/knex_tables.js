@@ -20,8 +20,8 @@ describe('knex_tables', function() {
 
     describe(dbTestValues.client, function() {
 
-      beforeEach(function() {
-        return BPromise.all([
+      beforeEach(async function() {
+        await BPromise.all([
           dbTestValues.knex.schema.createTable('test_1', function (table) {
             table.increments();
             table.string('name');
@@ -32,16 +32,14 @@ describe('knex_tables', function() {
             table.string('name');
             table.timestamps();
           })
-        ]).then(function() {
-          return dbTestValues.knex
-          .raw('CREATE VIEW test_view AS SELECT * FROM test_1');
-        });
+        ]);
+
+        return dbTestValues.knex.raw('CREATE VIEW test_view AS SELECT * FROM test_1');
       });
 
-      afterEach(function() {
-        return dbTestValues.knex.raw('DROP VIEW test_view').then(function() {
-          return knexTables.getDropTables(dbTestValues.knex, ['test_1', 'test_2']);
-        });
+      afterEach(async function() {
+        await dbTestValues.knex.raw('DROP VIEW test_view');
+        return knexTables.getDropTables(dbTestValues.knex, ['test_1', 'test_2']);
       });
 
       after(function () {
