@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/steven-ferguson/knex-cleaner.git"
+    "url": "git://github.com/arafel/knex-cleaner.git"
   },
   "keywords": [
     "knex",
@@ -20,10 +20,11 @@
   "author": "Steven Ferguson <steven.ferguson11@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/steven-ferguson/knex-cleaner/issues"
+    "url": "https://github.com/arafel/knex-cleaner/issues"
   },
   "contributors": [
-    "JT Turner (https://github.com/jtwebman)"
+    "JT Turner (https://github.com/jtwebman)",
+    "Paul Walker (https://github.com/arafel)"
   ],
   "dependencies": {
     "bluebird": "^2.9.13",
