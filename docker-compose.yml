@@ -11,7 +11,7 @@ services:
       MYSQL_RANDOM_ROOT_PASSWORD: 1
     command: --default-authentication-plugin=mysql_native_password
   postgres:
-    image: "postgres:9"
+    image: "postgres:11"
     ports:
       - "8082:5432"
     environment:
