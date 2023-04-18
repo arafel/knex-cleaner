@@ -4,7 +4,7 @@
   "description": "Database cleaner for Knex.js and bookshelf.js",
   "main": "./lib/knex_cleaner.js",
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha --timeout 60000",
+    "test": "mocha --timeout 60000",
     "release": "release-it"
   },
   "engines": {
@@ -39,10 +39,10 @@
     "config": "^3.3.8",
     "faker": "^2.1.2",
     "knex": "^2.4.0",
-    "mocha": "6.x",
+    "mocha": "^10.2.0",
     "mysql": "^2.18.1",
     "pg": "^8.10.0",
-    "release-it": "^12.3.5",
+    "release-it": "^15.10.1",
     "sqlite3": "^5.1.6"
   }
 }
