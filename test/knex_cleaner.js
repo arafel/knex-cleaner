@@ -68,7 +68,8 @@ describe('knex_cleaner', function() {
             dbTestValues.knex('test_1').insert({name: Faker.company.companyName()})
           ]);
 
-          await dbTestValues.knex('test_1').select().map(function(row) {
+          const rows = await dbTestValues.knex('test_1').select();
+          rows.map(function (row) {
             return dbTestValues.knex('test_2').insert({
               name: Faker.company.companyName(),
               test_1_id: row[0]

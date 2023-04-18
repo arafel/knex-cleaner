@@ -7,9 +7,12 @@
     "test": "./node_modules/mocha/bin/mocha --timeout 60000",
     "release": "release-it"
   },
+  "engines": {
+    "node": ">= 14.0"
+  },
   "repository": {
     "type": "git",
-    "url": "git://github.com/steven-ferguson/knex-cleaner.git"
+    "url": "git://github.com/arafel/knex-cleaner.git"
   },
   "keywords": [
     "knex",
@@ -20,10 +23,11 @@
   "author": "Steven Ferguson <steven.ferguson11@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/steven-ferguson/knex-cleaner/issues"
+    "url": "https://github.com/arafel/knex-cleaner/issues"
   },
   "contributors": [
-    "JT Turner (https://github.com/jtwebman)"
+    "JT Turner (https://github.com/jtwebman)",
+    "Paul Walker (https://github.com/arafel)"
   ],
   "dependencies": {
     "bluebird": "^2.9.13",
@@ -34,11 +38,11 @@
     "chai-as-promised": "5.3.x",
     "config": "^3.3.8",
     "faker": "^2.1.2",
-    "knex": "^0.19.5",
+    "knex": "^2.4.0",
     "mocha": "6.x",
-    "mysql": "^2.16.0",
-    "pg": "^4.3.0",
+    "mysql": "^2.18.1",
+    "pg": "^8.10.0",
     "release-it": "^12.3.5",
-    "sqlite3": "^4.0.8"
+    "sqlite3": "^5.1.6"
   }
 }
