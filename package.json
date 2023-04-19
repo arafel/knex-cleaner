@@ -37,10 +37,10 @@
     "lodash": "^4.17.13"
   },
   "devDependencies": {
+    "@faker-js/faker": "^7.6.0",
     "chai": "3.5.x",
     "chai-as-promised": "5.3.x",
     "config": "^3.3.8",
-    "faker": "^6.6.6",
     "knex": "^2.4.0",
     "mocha": "^10.2.0",
     "mysql": "^2.18.1",

@@ -1,5 +1,5 @@
 const BPromise = require('bluebird');
-const Faker = require('faker');
+const { faker } = require('@faker-js/faker');
 const chai = require("chai");
 const chaiAsPromised = require("chai-as-promised");
 const config = require('config');
@@ -63,15 +63,15 @@ describe('knex_cleaner', function() {
           });
 
           await BPromise.all([
-            dbTestValues.knex('test_1').insert({name: Faker.company.companyName()}),
-            dbTestValues.knex('test_1').insert({name: Faker.company.companyName()}),
-            dbTestValues.knex('test_1').insert({name: Faker.company.companyName()})
+            dbTestValues.knex('test_1').insert({name: faker.company.name()}),
+            dbTestValues.knex('test_1').insert({name: faker.company.name()}),
+            dbTestValues.knex('test_1').insert({name: faker.company.name()})
           ]);
 
           const rows = await dbTestValues.knex('test_1').select();
           rows.map(function (row) {
             return dbTestValues.knex('test_2').insert({
-              name: Faker.company.companyName(),
+              name: faker.company.name(),
               test_1_id: row[0]
             });
           });
