@@ -16,7 +16,8 @@
     "url": "git://github.com/arafel/knex-cleaner.git"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   },
   "keywords": [
     "knex",
