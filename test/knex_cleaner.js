@@ -7,6 +7,11 @@ const knexLib = require('knex');
 const knexCleaner = require('../lib/knex_cleaner');
 const knexTables = require('../lib/knex_tables');
 
+// Workaround a problem where config.get() returns a frozen/immutable
+// config, but knex's setHiddenProperty() expects to be able to modify
+// things. It's not a great solution, but it does work.
+process.env.ALLOW_CONFIG_MUTATIONS = 1;
+
 const knexMySQL = knexLib(config.get('mysql'));
 const knexPG = knexLib(config.get('pg'));
 const knexSqLite3 = knexLib(config.get('sqlite3'));
