@@ -14,7 +14,7 @@ jobs:
           MYSQL_DATABASE: knex_cleaner_test
           MYSQL_RANDOM_ROOT_PASSWORD: 1
         command: --default-authentication-plugin=mysql_native_password
-      - image: cimg/postgres:11.19
+      - image: cimg/postgres:13.20
         environment:
           POSTGRES_DB: knex_cleaner_test
           POSTGRES_USER: knex_cleaner
