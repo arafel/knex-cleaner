@@ -42,7 +42,7 @@
     "@faker-js/faker": "^9.0.3",
     "chai": "4.3.x",
     "chai-as-promised": "7.1.x",
-    "config": "^3.3.8",
+    "config": "^4.0.1",
     "knex": "^3.0.1",
     "mocha": "^11.1.0",
     "mysql": "^2.18.1",
