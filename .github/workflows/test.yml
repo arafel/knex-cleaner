@@ -1,0 +1,79 @@
+name: Test
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      mariadb:
+        image: mariadb:10.6
+        env:
+          MYSQL_USER: knex_cleaner
+          MYSQL_PASSWORD: password
+          MYSQL_DATABASE: knex_cleaner_test
+          MYSQL_RANDOM_ROOT_PASSWORD: "1"
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -u$$MYSQL_USER -p$$MYSQL_PASSWORD"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=10
+          --default-authentication-plugin=mysql_native_password
+
+      postgres:
+        image: postgres:13.20
+        env:
+          POSTGRES_DB: knex_cleaner_test
+          POSTGRES_USER: knex_cleaner
+          POSTGRES_PASSWORD: password
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U knex_cleaner -d knex_cleaner_test"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=10
+
+    env:
+      MYSQL_HOST: 127.0.0.1
+      MYSQL_PORT: 3306
+      MYSQL_USER: knex_cleaner
+      MYSQL_PASSWORD: password
+      MYSQL_DB: knex_cleaner_test
+      PG_HOST: 127.0.0.1
+      PG_PORT: 5432
+      PG_USER: knex_cleaner
+      PG_PASSWORD: password
+      PG_DB: knex_cleaner_test
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Wait for DBs
+        run: |
+          for i in {1..30}; do
+            nc -z 127.0.0.1 3306 && break
+            sleep 2
+          done
+          for i in {1..30}; do
+            nc -z 127.0.0.1 5432 && break
+            sleep 2
+          done
+
+      - name: Test
+        run: npm test
