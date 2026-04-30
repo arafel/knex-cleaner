@@ -1,7 +1,8 @@
 const BPromise = require('bluebird');
 const { faker } = require('@faker-js/faker');
 const chai = require("chai");
-const chaiAsPromised = require("chai-as-promised");
+const chaiAsPromisedModule = require("chai-as-promised");
+const chaiAsPromised = chaiAsPromisedModule.default || chaiAsPromisedModule;
 const config = require('config');
 const knexLib = require('knex');
 const knexCleaner = require('../lib/knex_cleaner');
