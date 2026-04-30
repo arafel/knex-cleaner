@@ -1,22 +1,14 @@
 import BPromise from 'bluebird';
 import * as chai from "chai";
 import chaiAsPromised from "chai-as-promised";
-import knex from 'knex';
-import config from 'config';
 import * as knexTables from '../lib/knex_tables.js';
-
-const knexMySQL = knex(config.get('mysql'));
-const knexPG = knex(config.get('pg'));
-const knexSqLite3 = knex(config.get('sqlite3'));
+import { getEnabledClients } from './db_clients.js';
 
 chai.should();
 chai.use(chaiAsPromised);
 
 describe('knex_tables', function() {
-
-  [{ client: 'mysql', knex: knexMySQL }, { client: 'postgresql', knex: knexPG },
-    { client: 'sqlite3', knex: knexSqLite3}]
-  .forEach(function(dbTestValues) {
+  getEnabledClients().forEach(function(dbTestValues) {
 
     describe(dbTestValues.client, function() {
 

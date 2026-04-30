@@ -4,12 +4,39 @@ on:
   push:
 
 jobs:
-  test:
+  sqlite:
     runs-on: ubuntu-latest
+
+    env:
+      TEST_DATABASES: sqlite3
+      SQLITE_FILE: ./knex_clean_test.sqlite
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Test
+        run: npm test
+
+  mariadb:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        mariadb-version: ['10.6', '10.11', '11.4']
 
     services:
       mariadb:
-        image: mariadb:10.6
+        image: mariadb:${{ matrix.mariadb-version }}
         env:
           MYSQL_USER: knex_cleaner
           MYSQL_PASSWORD: password
@@ -18,13 +45,52 @@ jobs:
         ports:
           - 3306:3306
         options: >-
-          --health-cmd="mysqladmin ping -h 127.0.0.1 -u$$MYSQL_USER -p$$MYSQL_PASSWORD"
+          --health-cmd="mariadb-admin ping -h 127.0.0.1 -u$$MYSQL_USER -p$$MYSQL_PASSWORD"
           --health-interval=10s
           --health-timeout=5s
           --health-retries=10
 
+    env:
+      TEST_DATABASES: mysql
+      MYSQL_HOST: 127.0.0.1
+      MYSQL_PORT: 3306
+      MYSQL_USER: knex_cleaner
+      MYSQL_PASSWORD: password
+      MYSQL_DB: knex_cleaner_test
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Wait for MariaDB
+        run: |
+          for i in {1..30}; do
+            nc -z 127.0.0.1 3306 && break
+            sleep 2
+          done
+
+      - name: Test
+        run: npm test
+
+  postgres:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        postgres-version: ['14', '15', '16', '17']
+
+    services:
       postgres:
-        image: postgres:13.20
+        image: postgres:${{ matrix.postgres-version }}
         env:
           POSTGRES_DB: knex_cleaner_test
           POSTGRES_USER: knex_cleaner
@@ -38,11 +104,7 @@ jobs:
           --health-retries=10
 
     env:
-      MYSQL_HOST: 127.0.0.1
-      MYSQL_PORT: 3306
-      MYSQL_USER: knex_cleaner
-      MYSQL_PASSWORD: password
-      MYSQL_DB: knex_cleaner_test
+      TEST_DATABASES: postgres
       PG_HOST: 127.0.0.1
       PG_PORT: 5432
       PG_USER: knex_cleaner
@@ -62,12 +124,8 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Wait for DBs
+      - name: Wait for PostgreSQL
         run: |
-          for i in {1..30}; do
-            nc -z 127.0.0.1 3306 && break
-            sleep 2
-          done
           for i in {1..30}; do
             nc -z 127.0.0.1 5432 && break
             sleep 2
