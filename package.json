@@ -1,6 +1,6 @@
 {
   "name": "@solarwinter/knex-cleaner",
-  "version": "1.4.3",
+  "version": "2.0.0",
   "description": "Database cleaner for Knex.js and bookshelf.js",
   "main": "./lib/knex_cleaner.js",
   "types": "types.d.ts",
