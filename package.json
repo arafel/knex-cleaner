@@ -42,7 +42,7 @@
   "devDependencies": {
     "@faker-js/faker": "^10.1.0",
     "chai": "4.3.x",
-    "chai-as-promised": "7.1.x",
+    "chai-as-promised": "8.0.x",
     "config": "^4.1.1",
     "knex": "^3.0.1",
     "mocha": "^11.1.0",
