@@ -50,5 +50,9 @@
     "pg": "^8.10.0",
     "release-it": "^20.0.0",
     "sqlite3": "^6.0.1"
+  },
+  "type": "module",
+  "exports": {
+    ".": "./lib/knex_cleaner.js"
   }
 }

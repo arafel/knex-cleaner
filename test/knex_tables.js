@@ -1,9 +1,9 @@
-const BPromise = require('bluebird');
-const chai = require("chai");
-const chaiAsPromised = require("chai-as-promised");
-const knex = require('knex');
-const config = require('config');
-const knexTables = require('../lib/knex_tables');
+import BPromise from 'bluebird';
+import chai from "chai";
+import chaiAsPromised from "chai-as-promised";
+import knex from 'knex';
+import config from 'config';
+import * as knexTables from '../lib/knex_tables.js';
 
 const knexMySQL = knex(config.get('mysql'));
 const knexPG = knex(config.get('pg'));
