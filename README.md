@@ -18,9 +18,11 @@ yarn add -D @solarwinter/knex-cleaner
 
 ### Usage
 ```javascript
-var knexCleaner = require('knex-cleaner');
+import knexCleaner from '@solarwinter/knex-cleaner';
 
-var knex = require('knex')({
+import knexLib from 'knex';
+
+const knex = knexLib({
   client: 'mysql',
   connection: {
     host     : '127.0.0.1',
@@ -35,7 +37,9 @@ knexCleaner.clean(knex).then(function() {
 });
 
 // You can also use this in BookshelfJS
-var bookshelf = require('bookshelf')(knex);
+import bookshelfLib from 'bookshelf';
+
+const bookshelf = bookshelfLib(knex);
 
 knexCleaner.clean(bookshelf.knex).then(function() {
 

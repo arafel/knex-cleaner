@@ -1,11 +1,11 @@
-const BPromise = require('bluebird');
-const { faker } = require('@faker-js/faker');
-const chai = require("chai");
-const chaiAsPromised = require("chai-as-promised");
-const config = require('config');
-const knexLib = require('knex');
-const knexCleaner = require('../lib/knex_cleaner');
-const knexTables = require('../lib/knex_tables');
+import BPromise from 'bluebird';
+import { faker } from '@faker-js/faker';
+import chai from "chai";
+import chaiAsPromised from "chai-as-promised";
+import config from 'config';
+import knexLib from 'knex';
+import knexCleaner from '../lib/knex_cleaner.js';
+import * as knexTables from '../lib/knex_tables.js';
 
 // Workaround a problem where config.get() returns a frozen/immutable
 // config, but knex's setHiddenProperty() expects to be able to modify
