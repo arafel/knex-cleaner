@@ -5,6 +5,8 @@
 Helper library to clean a PostgreSQL, MySQL or SQLite3 database tables
 using Knex. Great for integration tests.
 
+*Note* - the library has migrated to ESM format (import rather than require, etc). This is what prompted the version bump to 2.0.0. There are no functional changes in the library. There are enhancements to testing, so if you pick up the 2.x.x code you'll be picking up something tested against the current major DB versions.
+
 ### Installation
 ```
 npm install --save-dev @solarwinter/knex-cleaner
