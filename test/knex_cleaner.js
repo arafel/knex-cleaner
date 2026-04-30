@@ -1,6 +1,6 @@
 import BPromise from 'bluebird';
 import { faker } from '@faker-js/faker';
-import chai from "chai";
+import * as chai from "chai";
 import chaiAsPromised from "chai-as-promised";
 import config from 'config';
 import knexLib from 'knex';

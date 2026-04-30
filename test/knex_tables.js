@@ -1,5 +1,5 @@
 import BPromise from 'bluebird';
-import chai from "chai";
+import * as chai from "chai";
 import chaiAsPromised from "chai-as-promised";
 import knex from 'knex';
 import config from 'config';
