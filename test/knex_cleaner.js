@@ -2,30 +2,16 @@ import BPromise from 'bluebird';
 import { faker } from '@faker-js/faker';
 import * as chai from "chai";
 import chaiAsPromised from "chai-as-promised";
-import config from 'config';
-import knexLib from 'knex';
 import knexCleaner from '../lib/knex_cleaner.js';
 import * as knexTables from '../lib/knex_tables.js';
-
-// Workaround a problem where config.get() returns a frozen/immutable
-// config, but knex's setHiddenProperty() expects to be able to modify
-// things. It's not a great solution, but it does work.
-process.env.ALLOW_CONFIG_MUTATIONS = 1;
-
-const knexMySQL = knexLib(config.get('mysql'));
-const knexPG = knexLib(config.get('pg'));
-const knexSqLite3 = knexLib(config.get('sqlite3'));
+import { getEnabledClients } from './db_clients.js';
 
 const { expect } = chai;
 chai.should();
 chai.use(chaiAsPromised);
 
 describe('knex_cleaner', function() {
-  const clients = [
-    { client: 'mysql', knex: knexMySQL },
-    { client: 'postgres', knex: knexPG },
-    { client: 'sqllite', knex: knexSqLite3 },
-  ];
+  const clients = getEnabledClients();
 
   clients.forEach(function(dbTestValues) {
     const { knex, client } = dbTestValues;
@@ -36,7 +22,7 @@ describe('knex_cleaner', function() {
 
         return Promise.all(
           tableNames.map(tableName => {
-            if (tableName !== 'sqlite_sequence' || client !== 'sqllite') {
+            if (tableName !== 'sqlite_sequence' || client !== 'sqlite3') {
               return knex.schema.dropTable(tableName);
             }
           })
